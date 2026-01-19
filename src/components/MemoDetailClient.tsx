@@ -73,7 +73,7 @@ export default function MemoDetailClient({
       <Window title="Memo Detail" icon={<MemoIcon />} className="h-full">
         <div className="flex items-center justify-center h-full text-win98-gray-dark">
           <div className="text-center">
-            <div className="text-2xl mb-2">⏳</div>
+            <div className="text-4xl mb-2">⏳</div>
             <div>Loading...</div>
           </div>
         </div>
@@ -87,7 +87,7 @@ export default function MemoDetailClient({
       <Window title="Memo Detail" icon={<MemoIcon />} className="h-full">
         <div className="flex items-center justify-center h-full text-red-600">
           <div className="text-center">
-            <div className="text-2xl mb-2">❌</div>
+            <div className="text-4xl mb-2">❌</div>
             <div>{detailError}</div>
           </div>
         </div>
@@ -116,19 +116,19 @@ export default function MemoDetailClient({
         {/* Memo Header */}
         <div className="win98-sunken p-2 mb-2">
           <div className="flex justify-between items-start mb-1">
-            <div className="font-bold">{displayMemo.title || "(No Title)"}</div>
-            <div className="text-xs text-win98-gray-dark">
+            <div className="text-2xl font-bold">{displayMemo.title || "(No Title)"}</div>
+            <div className="text-lg text-win98-gray-dark">
               {formatDate(displayMemo.createdAt)}
             </div>
           </div>
-          <div className="text-xs text-win98-gray-dark">
+          <div className="text-lg text-win98-gray-dark">
             From: {displayMemo.name || "Anonymous"}
           </div>
         </div>
 
         {/* Memo Content */}
         <div className="win98-sunken p-2 mb-2 flex-1 overflow-auto min-h-0">
-          <div className="whitespace-pre-wrap break-words">
+          <div className="text-3xl whitespace-pre-wrap break-words">
             {displayMemo.content}
           </div>
         </div>
@@ -137,12 +137,12 @@ export default function MemoDetailClient({
         <div className="pt-2">
           <div className="win98-divider mb-2" />
           <div className="flex justify-between items-center mb-2">
-            <div className="font-bold text-xs flex items-center gap-1">
+            <div className="font-bold text-2xl flex items-center gap-1">
               <span>💬</span> Admin Reply
             </div>
             <Button
               onClick={() => setShowReplyEditor(!showReplyEditor)}
-              size="small"
+              size="default" 
             >
               {showReplyEditor
                 ? "Cancel"
@@ -159,13 +159,13 @@ export default function MemoDetailClient({
               onClose={() => setShowReplyEditor(false)}
             />
           ) : (
-            <div className="win98-sunken p-2 min-h-[60px]">
+            <div className="win98-sunken p-2 min-h-[120px]">
               {displayMemo.reply ? (
-                <div className="whitespace-pre-wrap break-words">
+                <div className="text-3xl whitespace-pre-wrap break-words">
                   {displayMemo.reply}
                 </div>
               ) : (
-                <div className="text-win98-gray-dark italic">No reply yet.</div>
+                <div className="text-3xl text-win98-gray-dark italic">No reply yet.</div>
               )}
             </div>
           )}

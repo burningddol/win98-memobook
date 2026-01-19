@@ -22,7 +22,7 @@ export default function Button({
   const sizeClasses =
     size === "small"
       ? "px-2 py-0.5 min-w-[50px] text-xs"
-      : "px-3 py-1 min-w-[75px] text-sm";
+      : "px-3 py-1 min-w-[75px] font-bold text-xl";
 
   const interactiveClasses = disabled
     ? ""

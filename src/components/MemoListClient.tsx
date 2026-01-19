@@ -87,13 +87,13 @@ export default function MemoListClient({ initialMemos }: MemoListClientProps) {
                       : "hover:bg-win98-gray-light"
                   } ${memo._id.startsWith("temp-") ? "opacity-50" : ""}`}
                 >
-                  <span className="text-xs">📝</span>
+                  <span className="text-lg">📝</span>
                   <div className="flex-1 min-w-0">
-                    <div className="truncate font-bold text-xs">
+                    <div className="truncate font-bold text-lg">
                       {memo.title || "(No Title)"}
                     </div>
                     <div
-                      className={`text-xs truncate ${
+                      className={`text-lg truncate ${
                         selectedMemoId === memo._id
                           ? "text-win98-gray-light"
                           : "text-win98-gray-dark"
