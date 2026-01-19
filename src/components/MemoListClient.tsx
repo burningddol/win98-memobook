@@ -1,25 +1,41 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useMemoStore } from "@/store/useMemoStore";
+import { MemoListItem } from "@/types/memo";
 import Window from "./win98/Window";
 import Button from "./win98/Button";
+import { ListIcon } from "./icons";
 
-export default function MemoList() {
+interface MemoListClientProps {
+  initialMemos: MemoListItem[];
+}
+
+export default function MemoListClient({ initialMemos }: MemoListClientProps) {
   const {
     memos,
     isLoadingList,
     listError,
     selectedMemoId,
     setSelectedMemoId,
+    setMemos,
     fetchMemos,
     fetchMemoDetail,
     openNewMemoModal,
   } = useMemoStore();
 
+  const hydratedRef = useRef(false);
+
+  // Hydrate memos from server data on first render (only once)
   useEffect(() => {
-    fetchMemos();
-  }, [fetchMemos]);
+    if (!hydratedRef.current && initialMemos.length > 0) {
+      // Only set if store is empty (not yet hydrated by StoreHydration)
+      if (memos.length === 0) {
+        setMemos(initialMemos);
+      }
+      hydratedRef.current = true;
+    }
+  }, [initialMemos, memos.length, setMemos]);
 
   const handleMemoClick = (id: string) => {
     // Don't select temp memos
@@ -37,27 +53,11 @@ export default function MemoList() {
     });
   };
 
-  const ListIcon = () => (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      className="text-current"
-    >
-      <rect x="2" y="2" width="12" height="12" fill="#ffffe1" stroke="#000" />
-      <line x1="4" y1="5" x2="12" y2="5" stroke="#000" />
-      <line x1="4" y1="8" x2="12" y2="8" stroke="#000" />
-      <line x1="4" y1="11" x2="10" y2="11" stroke="#000" />
-    </svg>
-  );
+  // Use server data on initial render, then switch to store
+  const displayMemos = memos.length > 0 ? memos : initialMemos;
 
   return (
-    <Window
-      title="Memo List"
-      icon={<ListIcon />}
-      className="h-full"
-    >
+    <Window title="Memo List" icon={<ListIcon />} className="h-full">
       <div className="flex flex-col h-full">
         {/* Toolbar */}
         <div className="flex gap-2 mb-2">
@@ -71,11 +71,13 @@ export default function MemoList() {
             <div className="p-2 text-win98-gray-dark">Loading...</div>
           ) : listError ? (
             <div className="p-2 text-red-600">{listError}</div>
-          ) : memos.length === 0 ? (
-            <div className="p-2 text-win98-gray-dark">No memos yet. Create one!</div>
+          ) : displayMemos.length === 0 ? (
+            <div className="p-2 text-win98-gray-dark">
+              No memos yet. Create one!
+            </div>
           ) : (
             <ul className="divide-y divide-win98-gray">
-              {memos.map((memo) => (
+              {displayMemos.map((memo) => (
                 <li
                   key={memo._id}
                   onClick={() => handleMemoClick(memo._id)}

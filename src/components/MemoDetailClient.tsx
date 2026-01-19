@@ -1,15 +1,42 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useMemoStore } from "@/store/useMemoStore";
+import { MemoDetail } from "@/types/memo";
 import Window from "./win98/Window";
 import Button from "./win98/Button";
 import AdminReplyEditor from "./AdminReplyEditor";
+import { MemoIcon } from "./icons";
 
-export default function MemoDetail() {
-  const { selectedMemo, isLoadingDetail, detailError, selectedMemoId } =
-    useMemoStore();
+interface MemoDetailClientProps {
+  initialMemo: MemoDetail | null;
+}
+
+export default function MemoDetailClient({
+  initialMemo,
+}: MemoDetailClientProps) {
+  const {
+    selectedMemo,
+    isLoadingDetail,
+    detailError,
+    selectedMemoId,
+    setSelectedMemo,
+    setSelectedMemoId,
+  } = useMemoStore();
   const [showReplyEditor, setShowReplyEditor] = useState(false);
+  const hydratedRef = useRef(false);
+
+  // Hydrate from server data on first render (only once)
+  useEffect(() => {
+    if (!hydratedRef.current && initialMemo) {
+      // Only set if store doesn't have this memo yet
+      if (!selectedMemo || selectedMemo._id !== initialMemo._id) {
+        setSelectedMemo(initialMemo);
+        setSelectedMemoId(initialMemo._id);
+      }
+      hydratedRef.current = true;
+    }
+  }, [initialMemo, selectedMemo, setSelectedMemo, setSelectedMemoId]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -22,18 +49,12 @@ export default function MemoDetail() {
     });
   };
 
-  const MemoIcon = () => (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <rect x="2" y="1" width="11" height="14" fill="#ffffe1" stroke="#000" />
-      <line x1="4" y1="4" x2="11" y2="4" stroke="#808080" />
-      <line x1="4" y1="6" x2="11" y2="6" stroke="#808080" />
-      <line x1="4" y1="8" x2="11" y2="8" stroke="#808080" />
-      <line x1="4" y1="10" x2="9" y2="10" stroke="#808080" />
-    </svg>
-  );
+  // Use store data if available, otherwise fall back to initial server data
+  const displayMemo = selectedMemo || initialMemo;
+  const displayMemoId = selectedMemoId || initialMemo?._id || null;
 
-  // No memo selected
-  if (!selectedMemoId) {
+  // No memo selected and no initial memo
+  if (!displayMemoId) {
     return (
       <Window title="Memo Detail" icon={<MemoIcon />} className="h-full">
         <div className="flex items-center justify-center h-full text-win98-gray-dark">
@@ -75,7 +96,7 @@ export default function MemoDetail() {
   }
 
   // No memo data
-  if (!selectedMemo) {
+  if (!displayMemo) {
     return (
       <Window title="Memo Detail" icon={<MemoIcon />} className="h-full">
         <div className="flex items-center justify-center h-full text-win98-gray-dark">
@@ -87,7 +108,7 @@ export default function MemoDetail() {
 
   return (
     <Window
-      title={`Memo: ${selectedMemo.title || "(No Title)"}`}
+      title={`Memo: ${displayMemo.title || "(No Title)"}`}
       icon={<MemoIcon />}
       className="h-full"
     >
@@ -95,22 +116,20 @@ export default function MemoDetail() {
         {/* Memo Header */}
         <div className="win98-sunken p-2 mb-2">
           <div className="flex justify-between items-start mb-1">
-            <div className="font-bold">
-              {selectedMemo.title || "(No Title)"}
-            </div>
+            <div className="font-bold">{displayMemo.title || "(No Title)"}</div>
             <div className="text-xs text-win98-gray-dark">
-              {formatDate(selectedMemo.createdAt)}
+              {formatDate(displayMemo.createdAt)}
             </div>
           </div>
           <div className="text-xs text-win98-gray-dark">
-            From: {selectedMemo.name || "Anonymous"}
+            From: {displayMemo.name || "Anonymous"}
           </div>
         </div>
 
         {/* Memo Content */}
         <div className="win98-sunken p-2 mb-2 flex-1 overflow-auto min-h-0">
           <div className="whitespace-pre-wrap break-words">
-            {selectedMemo.content}
+            {displayMemo.content}
           </div>
         </div>
 
@@ -125,26 +144,28 @@ export default function MemoDetail() {
               onClick={() => setShowReplyEditor(!showReplyEditor)}
               size="small"
             >
-              {showReplyEditor ? "Cancel" : selectedMemo.reply ? "Edit" : "Add Reply"}
+              {showReplyEditor
+                ? "Cancel"
+                : displayMemo.reply
+                  ? "Edit"
+                  : "Add Reply"}
             </Button>
           </div>
 
           {showReplyEditor ? (
             <AdminReplyEditor
-              memoId={selectedMemo._id}
-              currentReply={selectedMemo.reply}
+              memoId={displayMemo._id}
+              currentReply={displayMemo.reply}
               onClose={() => setShowReplyEditor(false)}
             />
           ) : (
             <div className="win98-sunken p-2 min-h-[60px]">
-              {selectedMemo.reply ? (
+              {displayMemo.reply ? (
                 <div className="whitespace-pre-wrap break-words">
-                  {selectedMemo.reply}
+                  {displayMemo.reply}
                 </div>
               ) : (
-                <div className="text-win98-gray-dark italic">
-                  No reply yet.
-                </div>
+                <div className="text-win98-gray-dark italic">No reply yet.</div>
               )}
             </div>
           )}

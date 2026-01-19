@@ -2,6 +2,9 @@ import { create } from "zustand";
 import { MemoListItem, MemoDetail } from "@/types/memo";
 
 interface MemoState {
+  // Hydration flag - tracks if initial data has been set
+  _hydrated: boolean;
+
   // List state
   memos: MemoListItem[];
   isLoadingList: boolean;
@@ -17,6 +20,9 @@ interface MemoState {
   isNewMemoModalOpen: boolean;
   isCreating: boolean;
   createError: string | null;
+
+  // Hydration action - called once from server data
+  hydrate: (initialMemos: MemoListItem[], initialMemo: MemoDetail | null) => void;
 
   // Actions
   setMemos: (memos: MemoListItem[]) => void;
@@ -42,6 +48,7 @@ interface MemoState {
 
 export const useMemoStore = create<MemoState>((set, get) => ({
   // Initial state
+  _hydrated: false,
   memos: [],
   isLoadingList: false,
   listError: null,
@@ -54,6 +61,18 @@ export const useMemoStore = create<MemoState>((set, get) => ({
   isNewMemoModalOpen: false,
   isCreating: false,
   createError: null,
+
+  // Hydrate store with server-fetched data (called once on mount)
+  hydrate: (initialMemos, initialMemo) => {
+    // Only hydrate once
+    if (get()._hydrated) return;
+    set({
+      _hydrated: true,
+      memos: initialMemos,
+      selectedMemo: initialMemo,
+      selectedMemoId: initialMemo?._id ?? null,
+    });
+  },
 
   // Sync actions
   setMemos: (memos) => set({ memos }),

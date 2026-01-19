@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(tree /F \"c:\\\\Users\\\\j\\\\Desktop\\\\코드잇\\\\memo-app\\\\src\")"
+      "Bash(tree /F \"c:\\\\Users\\\\j\\\\Desktop\\\\코드잇\\\\memo-app\\\\src\")",
+      "Bash(npm install:*)"
     ]
   }
 }

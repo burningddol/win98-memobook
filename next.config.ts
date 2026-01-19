@@ -1,10 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Force Node.js runtime for all API routes (required for Mongoose)
-  experimental: {
-    serverComponentsExternalPackages: ["mongoose"],
-  },
+  // External packages for server components (required for Mongoose)
+  serverExternalPackages: ["mongoose"],
 };
 
 export default nextConfig;
