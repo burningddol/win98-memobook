@@ -1,7 +1,7 @@
 <<<<<<< HEAD
 # win98-memobook
 =======
-# Guestbook 98
+# junseok's book 98
 
 A Windows 98-themed guestbook/memo application built with Next.js, Tailwind CSS, Zustand, and MongoDB.
 
@@ -21,58 +21,6 @@ A Windows 98-themed guestbook/memo application built with Next.js, Tailwind CSS,
 - **Validation**: Zod
 - **Runtime**: Node.js (required for Mongoose)
 
-## Setup
-
-### 1. Install Dependencies
-
-```bash
-npm install
-```
-
-### 2. Configure Environment
-
-Copy the example env file and fill in your values:
-
-```bash
-cp .env.example .env.local
-```
-
-Edit `.env.local`:
-
-```env
-MONGODB_URI=mongodb+srv://your-connection-string
-ADMIN_PASSWORD=your-secret-password
-```
-
-### 3. Run Development Server
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-## Deploy to Vercel
-
-### 1. Push to GitHub
-
-```bash
-git init
-git add .
-git commit -m "Initial commit"
-git remote add origin your-repo-url
-git push -u origin main
-```
-
-### 2. Import to Vercel
-
-1. Go to [vercel.com](https://vercel.com) and import your repository
-2. Add environment variables:
-   - `MONGODB_URI`: Your MongoDB connection string
-   - `ADMIN_PASSWORD`: Your admin password
-3. Deploy
-
-**Note**: This app uses Node.js runtime (not Edge) for Mongoose compatibility. Vercel will automatically detect this from the route handlers.
 
 ## API Endpoints
 
