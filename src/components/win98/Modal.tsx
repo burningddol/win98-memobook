@@ -56,7 +56,7 @@ export default function Modal({
         onClick={handleBackdropClick}
       />
       {/* Modal Window */}
-      <div className={`relative z-10 max-w-lg w-full mx-4 ${className}`}>
+      <div className={`  relative z-10 max-w-2xl w-full mx-4 border-black border-2  ${className}`}>
         <Window title={title} icon={icon}>
           {children}
         </Window>

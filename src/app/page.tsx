@@ -32,7 +32,7 @@ export default async function Home() {
         </div>
 
         <div className="flex-1 flex gap-4  w-full">
-          <div className="w-80  flex-shrink-0">
+          <div className="w-80   flex-shrink-0">
             <Suspense fallback={<MemosListSkeleton />}>
               <MemoListWithData />
             </Suspense>

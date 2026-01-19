@@ -12,12 +12,12 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     return (
       <div className="flex flex-col gap-1">
         {label && (
-          <label className="text-sm font-win98 select-none">{label}</label>
+          <label className="text-xl font-win98 select-none">{label}</label>
         )}
         <textarea
           ref={ref}
           className={`
-            win98-sunken px-1 py-0.5 text-sm font-win98 resize-none
+            win98-sunken px-1 py-0.5 text-xl font-win98 resize-none
             focus:outline-none
             disabled:bg-win98-gray disabled:text-win98-gray-dark disabled:cursor-not-allowed
             ${error ? "bg-red-50" : ""}

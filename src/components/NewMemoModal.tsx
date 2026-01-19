@@ -61,7 +61,7 @@ export default function NewMemoModal() {
       onClose={handleClose}
       icon={<NewMemoIcon />}
     >
-      <div className="space-y-3">
+      <div className=" space-y-3">
         <Input
           label="Your Name (optional):"
           value={name}
