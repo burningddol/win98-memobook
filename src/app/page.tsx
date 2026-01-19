@@ -24,7 +24,7 @@ export default async function Home() {
   return (
     
       <div className="min-h-screen p-4 flex flex-col">
-        <div className="text-black text-center mb-4">
+        <div className="text-black text-center ">
           <h1 className="text-4xl font-bold drop-shadow-[2px_2px_0_rgba(0,0,0,0.2)]">
             📝 junseok&apos;s book 
           </h1>
