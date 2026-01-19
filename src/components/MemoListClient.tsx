@@ -20,7 +20,7 @@ export default function MemoListClient({ initialMemos }: MemoListClientProps) {
     setSelectedMemoId,
     setMemos,
     fetchMemos,
-    fetchMemoDetail,
+    setMemoDetail,
     openNewMemoModal,
   } = useMemoStore();
 
@@ -41,7 +41,7 @@ export default function MemoListClient({ initialMemos }: MemoListClientProps) {
     // Don't select temp memos
     if (id.startsWith("temp-")) return;
     setSelectedMemoId(id);
-    fetchMemoDetail(id);
+    setMemoDetail(id);
   };
 
   const formatDate = (dateString: string) => {

@@ -3,6 +3,9 @@ export interface MemoListItem {
   name?: string;
   title?: string;
   createdAt: string;
+  content?: string;
+  updatedAt?: string;
+  reply?: string;
 }
 
 export interface MemoDetail {

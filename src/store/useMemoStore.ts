@@ -31,7 +31,7 @@ interface MemoState {
 
   // Async actions
   fetchMemos: () => Promise<void>;
-  fetchMemoDetail: (id: string) => Promise<void>;
+  setMemoDetail: (id: string) => void;
   createMemo: (data: {
     name?: string;
     title?: string;
@@ -85,20 +85,15 @@ export const useMemoStore = create<MemoState>((set, get) => ({
     }
   },
 
-  fetchMemoDetail: async (id) => {
-    set({ isLoadingDetail: true, detailError: null });
-    try {
-      const res = await fetch(`/api/memos/${id}`);
-      if (!res.ok) throw new Error("Failed to fetch memo");
-      const memo = await res.json();
-      set({ selectedMemo: memo, isLoadingDetail: false });
-    } catch (error) {
-      set({
-        detailError: error instanceof Error ? error.message : "Unknown error",
-        isLoadingDetail: false,
-      });
-    }
-  },
+  setMemoDetail:  (id) => {
+    
+    
+      const previousMemos = get().memos;
+      const memo = previousMemos.find((memo)=>memo._id===id) 
+      set({ selectedMemo: memo as MemoDetail, isLoadingDetail: false });
+    } 
+    
+  ,
 
   createMemo: async (data) => {
     set({ isCreating: true, createError: null });
@@ -165,6 +160,7 @@ export const useMemoStore = create<MemoState>((set, get) => ({
 
       const updatedMemo = await res.json();
       set({ selectedMemo: updatedMemo });
+      
       return true;
     } catch (error) {
       console.error("Error updating reply:", error);

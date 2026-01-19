@@ -12,7 +12,7 @@ export async function GET() {
     await dbConnect();
 
     const memos = await Memo.find({})
-      .select("_id name title createdAt")
+      .select("_id name title content reply updatedAt createdAt")
       .sort({ createdAt: -1 })
       .lean();
 

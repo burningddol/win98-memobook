@@ -11,7 +11,7 @@ export async function getMemosList(): Promise<MemoListItem[]> {
   await dbConnect();
 
   const memos = await Memo.find({})
-    .select("_id name title createdAt")
+    .select("_id name title content reply updatedAt createdAt")
     .sort({ createdAt: -1 })
     .lean();
 
@@ -19,6 +19,9 @@ export async function getMemosList(): Promise<MemoListItem[]> {
   return memos.map((memo) => ({
     _id: memo._id.toString(),
     name: memo.name,
+    content: memo.content,
+    reply: memo.reply,
+    updatedAt: memo.updatedAt.toISOString(),
     title: memo.title,
     createdAt: memo.createdAt.toISOString(),
   }));

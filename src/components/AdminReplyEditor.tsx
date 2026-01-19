@@ -23,7 +23,7 @@ export default function AdminReplyEditor({
   const [error, setError] = useState<string | null>(null);
 
   const updateReply = useMemoStore((state) => state.updateReply);
-
+  const fetchMemos = useMemoStore((state) => state.fetchMemos);
   const handleSubmit = async () => {
     if (!password.trim()) {
       setError("Password is required");
@@ -34,7 +34,7 @@ export default function AdminReplyEditor({
     setError(null);
 
     const success = await updateReply(memoId, reply, password);
-
+    fetchMemos();
     if (success) {
       onClose();
     } else {
