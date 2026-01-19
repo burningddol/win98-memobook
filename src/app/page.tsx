@@ -37,7 +37,7 @@ export default async function Home() {
       <div className="min-h-screen p-4 flex flex-col">
         <div className="text-white text-center mb-4">
           <h1 className="text-2xl font-bold drop-shadow-[2px_2px_0_rgba(0,0,0,0.5)]">
-            📝 junseok&apos;s book 98
+            📝 junseok&apos;s book 
           </h1>
           <p className="text-sm opacity-80">Leave a memo, get a reply!</p>
         </div>
