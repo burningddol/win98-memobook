@@ -48,6 +48,7 @@ export async function POST(request: NextRequest) {
         _id: memo._id,
         name: memo.name,
         title: memo.title,
+        content: memo.content,
         createdAt: memo.createdAt,
       },
       { status: 201 }

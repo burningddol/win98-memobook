@@ -104,6 +104,7 @@ export const useMemoStore = create<MemoState>((set, get) => ({
       _id: tempId,
       name: data.name,
       title: data.title,
+      content: data.content,
       createdAt: new Date().toISOString(),
     };
     const previousMemos = get().memos;

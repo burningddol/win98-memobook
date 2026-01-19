@@ -8,7 +8,7 @@ import Input from "./win98/Input";
 import TextArea from "./win98/TextArea";
 
 export default function NewMemoModal() {
-  const { isNewMemoModalOpen, closeNewMemoModal, createMemo, isCreating, createError } =
+  const { isNewMemoModalOpen, closeNewMemoModal,setSelectedMemoId, fetchMemos, createMemo, isCreating, createError } =
     useMemoStore();
 
   const [name, setName] = useState("");
@@ -29,7 +29,8 @@ export default function NewMemoModal() {
       title: title.trim() || undefined,
       content: content.trim(),
     });
-
+    
+    
     if (success) {
       // Reset form
       setName("");
