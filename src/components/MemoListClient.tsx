@@ -57,7 +57,7 @@ export default function MemoListClient({ initialMemos }: MemoListClientProps) {
   const displayMemos = memos.length > 0 ? memos : initialMemos;
 
   return (
-    <Window title="Memo List" icon={<ListIcon />} className="h-full">
+    <Window title="Memo List" icon={<ListIcon />} className="h-full ">
       <div className="flex flex-col h-full">
         {/* Toolbar */}
         <div className="flex gap-2 mb-2">

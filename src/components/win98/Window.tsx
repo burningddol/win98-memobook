@@ -17,11 +17,11 @@ export default function Window({
 }: WindowProps) {
   return (
     <div
-      className={`shadow-win98-window bg-win98-gray flex flex-col ${className}`}
+      className={` bg-win98-gray flex flex-col ${className}`}
       style={{ minWidth: "200px" }}
     >
-      <div className="win98-title-bar">
-        <div className="flex items-center gap-1 min-w-0 flex-1">
+      <div className=" win98-gray">
+        <div className="p-1 flex items-center gap-1 min-w-0 flex-1">
           {icon && (
             <span className="w-4 h-4 flex items-center justify-center flex-shrink-0">
               {icon}
