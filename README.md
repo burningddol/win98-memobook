@@ -57,5 +57,5 @@ src/
 
 ## AI Tools Utilized
 
-Claude Code: Logic implementation and refactoring
+Claude Code: Logic implementation and refactoring  
 Gpt: create proper prompt etc...
