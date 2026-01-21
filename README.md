@@ -55,8 +55,7 @@ src/
     └── memo.ts             # TypeScript types
 ```
 
-## Additional
-
-AI Tools Utilized
+## AI Tools Utilized
 
 Claude Code: Logic implementation and refactoring
+Gpt: create proper prompt etc...
