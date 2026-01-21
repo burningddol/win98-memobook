@@ -2,6 +2,8 @@
 
 A Windows 98-themed guestbook/memo application built with Next.js, Tailwind CSS, Zustand, and MongoDB.
 
+Development Timeline: 2026.01.19 - 2026.01.20
+
 ## Features
 
 - **Retro Win98 UI**: Classic Windows 98 styling with beveled buttons, window chrome, and that nostalgic gray palette
