@@ -2,13 +2,13 @@
 
 A Windows 98-themed guestbook/memo application built with Next.js, Tailwind CSS, Zustand, and MongoDB.
 
+Development Timeline: 2026.01.19 - 2026.01.20
+
 ## Features
 
 - **Retro Win98 UI**: Classic Windows 98 styling with beveled buttons, window chrome, and that nostalgic gray palette
 - **Memo System**: Visitors can submit memos (title optional, content required, name optional)
 - **Admin Replies**: Admin can write replies to memos using password authentication
-- **Real-time Updates**: Optimistic UI updates when creating memos
-- **Responsive Layout**: Side panel for memo list, main area for detail view
 
 ## Tech Stack
 
@@ -55,6 +55,11 @@ src/
     └── memo.ts             # TypeScript types
 ```
 
-## License
+## AI Tools Utilized
 
+<<<<<<< HEAD
 MIT
+=======
+- **Claude Code**: Logic implementation and refactoring  
+- **Gpt**: create proper prompt etc...
+>>>>>>> 8679446a2fd97130c305819d0ec055ad094f42d6
