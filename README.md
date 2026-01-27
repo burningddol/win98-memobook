@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# win98-memobook
-=======
 # junseok's book 98
 
 A Windows 98-themed guestbook/memo application built with Next.js, Tailwind CSS, Zustand, and MongoDB.
@@ -61,4 +58,3 @@ src/
 ## License
 
 MIT
->>>>>>> f4965b6 (start claude coding)
