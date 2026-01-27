@@ -6,6 +6,7 @@ import Modal from "./win98/Modal";
 import Button from "./win98/Button";
 import Input from "./win98/Input";
 import TextArea from "./win98/TextArea";
+import { useRouter } from "next/navigation";
 
 export default function NewMemoModal() {
   const { isNewMemoModalOpen, closeNewMemoModal,setSelectedMemoId, fetchMemos, createMemo, isCreating, createError } =
@@ -15,6 +16,8 @@ export default function NewMemoModal() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [validationError, setValidationError] = useState<string | null>(null);
+
+  const router = useRouter();
 
   const handleSubmit = async () => {
     setValidationError(null);
@@ -36,6 +39,7 @@ export default function NewMemoModal() {
       setName("");
       setTitle("");
       setContent("");
+      router.refresh();  // 캐시 최신화 (isr)
     }
   };
 

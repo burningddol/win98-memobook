@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { MemoListItem, MemoDetail } from "@/types/memo";
 
+
 interface MemoState {
 
 
@@ -71,12 +72,16 @@ export const useMemoStore = create<MemoState>((set, get) => ({
 
   // Async actions
   fetchMemos: async () => {
+
+
+
     set({ isLoadingList: true, listError: null });
     try {
       const res = await fetch("/api/memos");
       if (!res.ok) throw new Error("Failed to fetch memos");
       const memos = await res.json();
       set({ memos, isLoadingList: false });
+      
     } catch (error) {
       set({
         listError: error instanceof Error ? error.message : "Unknown error",
