@@ -6,7 +6,7 @@ import MemosListSkeleton from "@/components/skeletons/MemosListSkeleton";
 import MemoDetailSkeleton from "@/components/skeletons/MemoDetailSkeleton";
 import NewMemoModal from "@/components/NewMemoModal";
 
-export const revalidate = 5;
+export const revalidate = 1;
 
 async function MemoListWithData() {
   const memos = await getMemosList();
