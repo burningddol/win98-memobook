@@ -66,7 +66,7 @@ export default function MemoListClient({ initialMemos }: MemoListClientProps) {
         </div>
 
         {/* List Container */}
-        <div className="win98-sunken flex-1 overflow-auto min-h-0">
+        <div className="win98-sunken flex-1 overflow-y-auto min-h-0 max-h-[79.5vh]">
           {isLoadingList ? (
             <div className="p-2 text-win98-gray-dark">Loading...</div>
           ) : listError ? (
